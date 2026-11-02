@@ -145,8 +145,8 @@ export function drawOverlay(guides) {
   if (!d || !E.ovl) return;
   const o = E.ovl;
   o.replaceChildren();
-  if (E.view.grid) o.append(h('div', { class: 'gridlines', style: { backgroundSize: `${E.view.gridSize * z}px ${E.view.gridSize * z}px` } }));
-  if (E.view.margins) {
+  if (E.view.grid && !E.lockView) o.append(h('div', { class: 'gridlines', style: { backgroundSize: `${E.view.gridSize * z}px ${E.view.gridSize * z}px` } }));
+  if (E.view.margins && !E.lockView) {
     const f = frame(d);
     o.append(h('div', { class: 'mg', style: { left: f.l * z + 'px', top: f.t * z + 'px', width: f.W * z + 'px', height: f.H * z + 'px' } }));
   }

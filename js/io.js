@@ -233,7 +233,7 @@ async function patchTransitions(zip, d) {
 export async function printDialog(pdf) {
   const d = E.doc;
   const P = d.print = { layout: 'slide', paper: 'slide', orient: 'landscape', m: { t: 0, r: 0, b: 0, l: 0 }, skipped: false, bg: true, num: false, frame: false, ...(d.print || {}) };
-  const layout = select([['slide', '1 slide per halaman'], ['notes', 'Slide dengan catatan pembicara'], ['h2', 'Handout 2 slide'], ['h3', 'Handout 3 slide (dengan garis catatan)'], ['h4', 'Handout 4 slide'], ['h6', 'Handout 6 slide'], ['h9', 'Handout 9 slide']], P.layout, v => { P.layout = v; if (v !== 'slide' && P.paper === 'slide') { P.paper = 'a4'; paper.value = 'a4'; } P.orient = v === 'slide' ? 'landscape' : v === 'h4' || v === 'h9' ? 'landscape' : 'portrait'; orient.value = P.orient; draw(); });
+  const layout = select([['slide', '1 slide per halaman'], ['notes', 'Slide dengan catatan pembicara'], ['h2', 'Handout 2 slide'], ['h3', 'Handout 3 slide (dengan garis catatan)'], ['h4', 'Handout 4 slide'], ['h6', 'Handout 6 slide'], ['h9', 'Handout 9 slide']], P.layout, v => { P.layout = v; if (v !== 'slide' && P.paper === 'slide') { P.paper = 'a4'; paper.value = 'a4'; } P.orient = v === 'slide' ? 'landscape' : v === 'h4' || v === 'h9' ? 'landscape' : 'portrait'; orient.value = P.orient; if (v !== 'slide' && Object.values(P.m).every(x => !x)) for (const k in mIn) { mIn[k].value = 12.7; P.m[k] = 12.7; } draw(); });
   const paper = select([['slide', 'Sesuai ukuran slide'], ['a4', 'A4'], ['letter', 'Letter'], ['legal', 'Legal'], ['f4', 'F4 / Folio']], P.paper, v => { P.paper = v; draw(); });
   const orient = select([['landscape', 'Mendatar'], ['portrait', 'Tegak']], P.orient, v => { P.orient = v; draw(); });
   const mIn = {};

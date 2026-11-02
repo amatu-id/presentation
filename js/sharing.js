@@ -5,6 +5,7 @@ import { h, icon, toast, dialog } from './ui.js';
 import { Store } from './store.js';
 import { newPres, normalize } from './model.js';
 import { Live, rpc, account, shareKey, linkFor, errText, merge3 } from './live.js';
+import { Hist } from './editor.js';
 
 export { shareKey };
 const APP = 'presentation';
@@ -53,6 +54,7 @@ function applyDoc(x) {
   document.title = d.title + ' - Amatu Slides';
   E.cur = Math.min(E.cur, d.slides.length - 1);
   E.sel = new Set([...E.sel].filter(id => (E.editMaster ? d.master : d.slides[E.cur].els).some(e => e.id === id)));
+  if (E.lockView) Hist.reset(); else Hist.push('Sinkron');   // viewers revert to the latest server copy
   E.render(); E.renderStrip?.(); E.updateNotes?.(); E.refreshPanel?.(); E.updateStatus?.(); E.updateToolbar?.();
 }
 

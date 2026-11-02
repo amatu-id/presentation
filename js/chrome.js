@@ -285,7 +285,7 @@ E.updateStatus = rafOnce(() => {
   ui.vSort.classList.toggle('on', !!E.view.sorter);
   ui.vNorm.classList.toggle('on', !E.view.sorter);
 });
-E.updateNotes = () => { if (E.notes && document.activeElement !== E.notes) E.notes.value = slide()?.notes || ''; E.notes.readOnly = !!E.lockView; };
+E.updateNotes = () => { if (E.notes && document.activeElement !== E.notes) E.notes.value = slide()?.notes || ''; E.notes.readOnly = !!E.lockView; E.notes.placeholder = E.lockView ? 'Tidak ada catatan pembicara' : 'Klik untuk menambahkan catatan pembicara'; };
 
 // dimension tooltip while dragging
 let dimEl = null;
